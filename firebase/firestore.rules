@@ -1,0 +1,42 @@
+rules_version = '2';
+
+// Mis Finanzas — cada usuario solo puede leer y escribir sus propios datos.
+//   users/{uid}/transactions/{txId}
+//   users/{uid}/budgets/{categoria}
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    match /users/{uid}/transactions/{txId} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && validTransaction(request.resource.data);
+    }
+
+    match /users/{uid}/budgets/{category} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && category in ['Vivienda', 'Alimentación', 'Transporte', 'Servicios', 'Salud', 'Educación', 'Ocio', 'Otros']
+        && request.resource.data.amount is number
+        && request.resource.data.amount > 0
+        && request.resource.data.amount < 10000000;
+    }
+
+    // Todo lo demás está cerrado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function validTransaction(d) {
+      return d.keys().hasOnly(['type', 'amount', 'description', 'category', 'date', 'createdAt', 'updatedAt'])
+        && d.type in ['income', 'expense']
+        && d.amount is number && d.amount > 0 && d.amount < 10000000
+        && d.description is string && d.description.size() <= 120
+        && d.category is string && d.category.size() <= 40
+        && d.date is string && d.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && d.createdAt is number && d.updatedAt is number;
+    }
+  }
+}

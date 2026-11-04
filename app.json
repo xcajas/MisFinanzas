@@ -1,25 +1,47 @@
 {
   "expo": {
-    "name": "mis-finanzas",
+    "name": "Mis Finanzas",
     "slug": "mis-finanzas",
+    "scheme": "misfinanzas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0b1120",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.misfinanzas.app",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Usamos Face ID para desbloquear Mis Finanzas de forma rápida y segura."
+      }
     },
     "android": {
+      "package": "com.misfinanzas.app",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0b1120",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      "expo-router",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Usamos Face ID para desbloquear Mis Finanzas de forma rápida y segura."
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "imageWidth": 120,
+          "backgroundColor": "#0b1120"
+        }
+      ]
+    ]
   }
 }
