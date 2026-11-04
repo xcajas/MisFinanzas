@@ -66,6 +66,22 @@ Requisitos: **Node.js 22.13 o superior** (LTS 22 o 24; Expo SDK 58 no funciona c
 El desbloqueo biométrico se ofrece después del primer ingreso con contraseña. Si está activo, la app se bloquea
 al abrirse y tras 60 s en segundo plano. Se puede activar o desactivar desde la hoja de cuenta.
 
+## Generar la APK para Android
+
+La APK se compila gratis en la nube con **EAS Build**, sin Android Studio. Necesitas una cuenta en <https://expo.dev>.
+El archivo `.easignore` hace que se suba tu `.env`, así la APK lleva la configuración de Firebase.
+
+```bash
+npx eas-cli@latest login
+```
+
+```bash
+npx eas-cli@latest build --platform android --profile preview
+```
+
+La primera vez pregunta si crear el proyecto en EAS y si generar el keystore de Android: responde **Y** a ambas.
+Al terminar (10–20 min) muestra un enlace y un QR para descargar la `.apk` e instalarla en el teléfono.
+
 ## Cómo funciona sin internet
 
 ```
