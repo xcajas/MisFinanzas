@@ -44,3 +44,5 @@ yarn-error.*
 .env
 .firebaserc
 .firebase/
+MisFinanzas.zip
+MisFinanzas.bundle
