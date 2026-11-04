@@ -23,7 +23,7 @@ Categorías de ingreso: Sueldo 💼, Freelance 💻, Inversiones 📈, Otros ➕
 
 ## Puesta en marcha
 
-Requisitos: Node.js 20 o superior y la app **Expo Go** (SDK 58) en tu teléfono, o un emulador.
+Requisitos: **Node.js 22.13 o superior** (LTS 22 o 24; Expo SDK 58 no funciona con Node 18 ni 20) y la app **Expo Go** (SDK 58) en tu teléfono, o un emulador.
 
 1. Instala las dependencias:
 

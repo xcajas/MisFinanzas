@@ -36,5 +36,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "expo lint"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  }
 }
